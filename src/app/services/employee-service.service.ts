@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Department } from '../entity/department';
 import { Employee } from '../entity/employee';
 import { ResponseDTO } from '../entity/responseDTO';
@@ -9,8 +10,8 @@ import { ResponseDTO } from '../entity/responseDTO';
   providedIn: 'root'
 })
 export class EmployeeServiceService {
-
-  URL:string = "http://localhost:8080/api/v1/employee/";
+  
+  URL:string = environment.apiBaseUrl;
 
   constructor(private httpClient: HttpClient) {
 
