@@ -1,0 +1,83 @@
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-10 col-sm-10">
+    </div>
+    <div class="col-md-2 col-sm-2">
+      <a routerLink ="/add"  class="btn btn-sm btn-dark form-control fw-bold text-info">CREATE</a>
+    </div>
+  </div>
+  <div class="search-form my-4">
+    <form>
+      <div class="row">
+        <div class="col-md-4 col-sm-9">
+          <input type="text" class="form-control" placeholder="search by name" (keyup)="searchEmployeeByname($event)">
+        </div>
+      </div>
+    </form>
+  </div>
+
+<div class="employee-result">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">NAME</th>
+        <th scope="col">MOBILE</th>
+        <th scope="col">EMPID</th>
+        <th scope="col">SALARY</th>
+        <th scope="col">DEPARTMENT</th>
+        <th scope="col">ACTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employees;index as i">
+        <td>{{i+1}}</td>
+        <td>{{emp.firstName}}</td>
+        <td>{{emp.mobile}}</td>
+        <td class="fw-bold text-success">{{emp.empId}}</td>
+        <td>{{emp.salary}}</td>
+        <td>{{emp.department.deptName}}</td>
+        <td><i class="fa fa-trash-o fw-bold text-danger fs-5" (click)="deleteEmployee(emp.emprfnum)"></i>
+          <i class=" mx-2 fa fa-eye fw-bold text-success  fs-5" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getEmployeeById(emp.emprfnum)"></i>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+  <!-- modal start -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="card p-4 w-100">
+                <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+                  <div *ngIf="employee.gender =='M'; then maleicon else femaleicon"></div>
+                  <ng-template #maleicon> <img src="/assets/img/maleicon.png" height="110" width="110" /></ng-template>
+                  <ng-template #femaleicon> <img src="/assets/img/femaleicon.png" height="110" width="110" /></ng-template>
+                    <div class="mt-4">
+                      <h5><span class="name mt-3">{{employee.firstName}} {{employee.lastName}}</span></h5> <span class="idd">{{employee.email}}</span>
+                    </div>
+                  <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <h5 class="idd1 fw-bold text-success my-2">{{employee.empId}}</h5>  </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center  fw-bold ">  <span class="follow">{{employee.designation}}</span> </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center my-2">  <span class="follow text-danger">{{employee.department.deptName}}</span>
+                    </div>
+                    <div class=" d-flex mt-2">
+                      <a [routerLink]="['/edit/', employee.emprfnum]" data-bs-dismiss="modal" class="btn btn-sm btn-dark form-control fw-bold text-info text-uppercase">Edit Profile</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- modal end -->

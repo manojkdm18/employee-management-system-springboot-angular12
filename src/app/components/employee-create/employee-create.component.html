@@ -1,0 +1,141 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-10 col-sm-10">
+      </div>
+    <div class="col-md-2 col-sm-2">
+  <a routerLink ="/search"  class="btn btn-sm btn-dark form-control fw-bold text-info">SEARCH</a>
+  </div>
+  </div>
+<div class="create-employee my-4">
+  <div class="alert alert-secondary" role="alert" *ngIf="response != null && message != null">
+    <div *ngIf="response.statusCode == 0; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock ><span class="text-success fw-bold">{{message}}</span></ng-template>
+    <ng-template #elseBlock ><span class="text-danger fw-bold">{{message}}</span></ng-template>
+  </div>
+    <form [formGroup]="empForm"  (ngSubmit)="createEmployee()" >
+        <div class="row">
+          <input type="hidden" class="form-control"  formControlName="emprfnum" [(ngModel)]="employee.emprfnum" name="emprfnum">
+          <div class="col-md-4 col-sm-12">
+            <label  class="form-label">First Name <span class="text-danger">*</span> </label>
+            <input type="text" class="form-control"  formControlName="firstName" [(ngModel)]="employee.firstName" name="firstName">
+            <div  class="form-text text-danger" *ngIf="firstName.invalid && firstName.touched">
+             <small>**Please enter your first name.</small> 
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label class="form-label">Last Name <span class="text-danger">*</span> </label>
+            <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="employee.lastName" >
+            <div class="form-text text-danger" *ngIf="lastName.invalid && lastName.touched">
+              <small> **Please enter your last name.</small> 
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label  class="form-label">Mobile <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" formControlName="mobile" [(ngModel)]="employee.mobile"  >
+            <div class="form-text text-danger" *ngIf="mobile.invalid && mobile.touched">
+              <small>**Please enter your valid mobile.</small> 
+            </div>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <label for="emailid" class="form-label">Email <span class="text-danger">*</span></label>
+              <input type="text" formControlName="email" class="form-control" [(ngModel)]="employee.email" >
+              <div class="form-text text-danger" *ngIf="email.invalid && email.touched">
+                <small>**Please enter your valid email.</small>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label  class="form-label">Date of Birth <span class="text-danger">*</span></label>
+              <input type="date" class="form-control" formControlName="dateofbirth" [(ngModel)]="employee.dateofbirth"  >
+              <div  class="form-text text-danger" *ngIf="dateofbirth.invalid && dateofbirth.touched">
+               <small> **Please enter your date for birth.</small>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label class="form-label">Designation <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="designation" [(ngModel)]="employee.designation" >
+              <div  class="form-text text-danger" *ngIf="designation.invalid && designation.touched">
+                <small>**Please enter your designation.</small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <label  class="form-label">Salary <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="salary" [(ngModel)]="employee.salary" >
+              <div  class="form-text text-danger" *ngIf="salary.invalid && salary.touched">
+               <small> **Please enter your salary.</small>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <label class="form-label">Gender <span class="text-danger">*</span></label>
+              <select class="form-select" formControlName="gender" [(ngModel)]="employee.gender" >
+                <option value="M" selected>MALE</option>
+                <option value="F">FEMALE</option>
+              </select> 
+              <div class="form-text text-danger" *ngIf="gender.invalid && gender.touched">
+                <small>**Please select your gender.</small>
+              </div>
+             </div>
+             <div class="col-md-4 col-sm-12">
+              <label  class="form-label">Pincode <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="pincode" [(ngModel)]="employee.address.zipcode" >
+              <div  class="form-text text-danger" *ngIf="pincode.invalid && pincode.touched">
+               <small> **Please enter your pincode.</small>
+              </div>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <label class="form-label">Country <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="country" [(ngModel)]="employee.address.country">
+              <div  class="form-text text-danger" *ngIf="country.invalid && country.touched">
+                <small>**Please enter your country.</small>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <label  class="form-label">State <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="state" [(ngModel)]="employee.address.state">
+              <div class="form-text text-danger" *ngIf="state.invalid && state.touched">
+               <small> **Please enter your state.</small>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+              <label class="form-label">City <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="city" [(ngModel)]="employee.address.city">
+              <div  class="form-text text-danger" *ngIf="city.invalid && city.touched">
+                <small>**Please enter your city.</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-12">
+              <label  class="form-label">Department <span class="text-danger">*</span></label>
+              <select class="form-select" formControlName="department" [(ngModel)]="employee.department.deptrfnum" >
+                <option value="{{dept.deptrfnum}}" *ngFor="let dept of departments">{{dept.deptName}}</option>
+              </select>
+              <div class="form-text text-danger" *ngIf="department.invalid && department.touched">
+                <small>**Please select your department.</small>
+              </div>
+          </div>
+          <div class="col-md-4 col-sm-12">
+          </div>
+          <div class="col-md-4 col-sm-12">
+          </div>
+          </div>
+
+        <div class="row my-4">
+          <div class="col-md-10 col-sm-12">
+          </div>
+          <div class="col-md-2 col-sm-12">
+            <input type="submit" [disabled]="empForm.invalid" class="form-control fw-bold btn btn-sm btn-success pull-right" value="SUBMIT">
+          </div>
+        </div>
+      </form>
+</div>
+</div>
